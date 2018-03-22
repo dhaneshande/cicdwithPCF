@@ -15,7 +15,7 @@ resources:
 - name: myapp
   type: git
   source:
-    uri: https://github.com/dhaneshande/demoapp.git
+    uri: https://github.com/dhaneshande/cicdwithPCF.git
     branch: master
 
 - name: cf-env
@@ -27,14 +27,6 @@ resources:
     organization: {{pws-organization}}
     space: {{pws-space}}
     skip_cert_check: true
-
-- name: docker-image
-  type: docker-image
-  source:
-    email: {{docker-email}}
-    username: {{docker-username}}
-    password: {{docker-password}}
-    repository: {{docker-repo}}
 
 - name: uaa-build
   type: artifactory
@@ -53,7 +45,7 @@ resources:
 
 jobs:
  
-- name: generate node-modules and mocha test
+- name: Build Unit Tests And Upload to Artifactory
   serial: true
   disable_manual_trigger: false
   plan:
@@ -71,7 +63,7 @@ jobs:
               path: .
           run:
             path: npm
-            args: [ install-test ]
+            args: [ install, run test, run test:coverage, run test:report ]
         on_success:
           put: alert
           params:
@@ -86,32 +78,6 @@ jobs:
             username: dhanesh
             icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
             text:  Test Failed!
-
-- name: build-docker-image and pushed to dockerhub
-  public: true
-  serial: true
-  plan:
-  - get: myapp
-    trigger: true
-    passed:
-      - generate node-modules and mocha test
-  - put: docker-image
-    params:
-      build: myapp
-    on_success:
-      put: alert
-      params:
-        channel: "#general"
-        username: dhanesh
-        icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-        text:  Docker image upload is Successfully Done!
-    on_failure:
-      put: alert
-      params:
-        channel: "#general"
-        username: dhanesh
-        icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-        text:  Docker image upload Failed!
 
 - name: build-artifact and put artifact in jfrog artifactory     
   plan:
