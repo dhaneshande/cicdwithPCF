@@ -99,10 +99,10 @@ jobs:
   plan:
   - get: myapp
     trigger: true
-  - task: retrieve
-    file: myapp/retrieve.yml  
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory 
+  - task: retrieve
+    file: myapp/retrieve.yml
   - put: cf-env
     params:
       manifest: myapp/manifest.yml
