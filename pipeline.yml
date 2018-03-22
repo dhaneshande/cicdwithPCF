@@ -85,20 +85,22 @@ jobs:
         channel: "#general"
         username: dhanesh
         icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-        text:  storing of the app to Artifact is successfull!
+        text:  Building of Node.js app unit tests is successfull and storing of the build artifacts to Artifactory is successfull!
     on_failure:
       put: alert
       params:
         channel: "#general"
         username: dhanesh
         icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-        text:  Artifact storing Failed!
+        text:  Building of Node.js app unit tests Failed and storing of the build artifacts to Artifactory Failed!
 
 - name: deploy to pws
   serial: true
   plan:
   - get: myapp
     trigger: true
+  - task: retrieve
+    file: myapp/retrieve.yml  
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory 
   - put: cf-env
