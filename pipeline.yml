@@ -55,12 +55,11 @@ jobs:
       - task: npm-test
         config:
           platform: linux
-          image_resource:
-            type: docker-image
-            source: {repository: node, tag: "6" }
           inputs:
             - name: myapp
-              path: .
+          image_resource:
+            type: docker-image
+            source: { repository: node, tag: "6" }
           run:
             path: sh
             args: 
@@ -92,7 +91,7 @@ jobs:
   - get: myapp
     trigger: true
     passed:
-      - build-docker-image and pushed to dockerhub
+      - Build Unit Tests And Upload to Artifactory
   - task: build
     config:
       platform: linux
