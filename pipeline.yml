@@ -12,7 +12,7 @@ resource_types:
     repository: cfcommunity/slack-notification-resource
  
 resources:
-- name: myapp
+- name: app
   type: git
   source:
     uri: https://github.com/dhaneshande/cicdwithPCF.git
@@ -49,14 +49,16 @@ jobs:
   serial: true
   disable_manual_trigger: false
   plan:
-      - get: myapp
+      - get: app
         trigger: true
         
       - task: npm-test
         config:
           platform: linux
           inputs:
-            - name: myapp
+            - name: app
+          outputs:
+            - name: uaa_war
           image_resource:
             type: docker-image
             source: { repository: node, tag: "6" }
@@ -66,82 +68,44 @@ jobs:
             - -exc
             - |
               export TERM=dumb
-              cd myapp
+              cd app
               npm install
               npm run test
               npm run test:coverage
               npm run test:report
+              npm pack
+              ls -la
+              mv ./app-1.0.0.tgz ../uaa_war
+              ls -la
+  - put: uaa-build
+    params:
+      file: uaa_war/app-*.tgz			  
         on_success:
           put: alert
           params:
             channel: "#general"
             username: dhanesh
             icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-            text:   Testing of the app is Successfully Done!
+            text:   Testing of the app and also storing of build Artifacts to Artifactory is Successfully Done!
         on_failure:
           put: alert
           params:
             channel: "#general"
             username: dhanesh
             icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-            text:  Test Failed!
-
-- name: build-artifact and put artifact in jfrog artifactory     
-  plan:
-  - get: myapp
-    trigger: true
-    passed:
-      - Build Unit Tests And Upload to Artifactory
-  - task: build
-    config:
-      platform: linux
-      inputs:
-      - name: myapp
-      outputs:
-      - name: uaa_war
-      image_resource:
-        type: docker-image
-        source: { repository: dhaneshande/demoapp }
-      run:
-        path: sh
-        args:
-        - -exc
-        - |
-          export TERM=dumb
-          cd myapp
-          npm pack
-          ls -la
-          mv ./cf-nodejs-1.0.0.tgz ../uaa_war
-          ls -la
-  - put: uaa-build
-    params:
-      file: uaa_war/cf-nodejs-*.tgz
-    on_success:
-      put: alert
-      params:
-        channel: "#general"
-        username: dhanesh
-        icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-        text:  storing of the app to Artifact is successfull!
-    on_failure:
-      put: alert
-      params:
-        channel: "#general"
-        username: dhanesh
-        icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-        text:  Artifact storing Failed!
+            text:  Test Failed and also storing of build Artifacts to Artifactory Failed !
 
 - name: deploy to pws
   serial: true
   plan:
-  - get: myapp
+  - get: app
     trigger: true
     passed:
       - build-artifact and put artifact in jfrog artifactory
   - put: cf-env
     params:
-      manifest: myapp/manifest.yml
-      path: myapp
+      manifest: app/manifest.yml
+      path: app
     on_success:
       put: alert
       params:
