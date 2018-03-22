@@ -96,13 +96,30 @@ jobs:
 
 - name: deploy to pws
   serial: true
+  public: true
   plan:
   - get: myapp
     trigger: true
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory 
   - task: retrieve
-    file: myapp/retrieve.yml
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: ubuntu
+          tag: "latest"
+      inputs:
+      - name: myapp
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          export DATESTRING=$(date +"%Y%m%d")
+          ls -la myapp
+          #cat ./file-repository/myapp*.txt
   - put: cf-env
     params:
       manifest: myapp/manifest.yml
