@@ -134,7 +134,6 @@ jobs:
           cd package
           ls -la
           mv ./manifest.yml ../uaaa
-          ls -la uaaa
           cd ..
           cd ..
           chmod -R 777 uaaa
