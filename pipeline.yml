@@ -101,6 +101,9 @@ jobs:
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory 
     trigger: true
+  - get: myapp
+    passed:
+      - Build Unit Tests And Upload to JFrog Artifactory
   - task: retrieve
     config:
       platform: linux
@@ -120,6 +123,7 @@ jobs:
           ls -la
           ls -la uaa-build
           tar -xvzf myapp-0.0.0.tgz
+          ls -la
           #cat ./file-repository/myapp*.txt
   - put: cf-env
     params:
