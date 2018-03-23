@@ -101,10 +101,10 @@ jobs:
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory 
     trigger: true
-  - get: myapp
-    passed:
-      - Build Unit Tests And Upload to JFrog Artifactory
-    trigger: true
+  #- get: myapp
+    #passed:
+    #  - Build Unit Tests And Upload to JFrog Artifactory
+    #trigger: true
   - task: retrieve
     config:
       platform: linux
