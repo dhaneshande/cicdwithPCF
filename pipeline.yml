@@ -132,8 +132,6 @@ jobs:
           ls -la
           cd package
           ls -la
-          cp -r manifest.yml uaaa/
-          cat uaaa
   - put: cf-env
     params:
       manifest: uaaa/package/manifest.yml
