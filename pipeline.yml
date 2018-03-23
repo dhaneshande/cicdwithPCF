@@ -104,6 +104,7 @@ jobs:
   - get: myapp
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory
+    trigger: true
   - task: retrieve
     config:
       platform: linux
@@ -122,12 +123,12 @@ jobs:
           export TERM=dumb
           ls -la
           ls -la uaa-build
-          tar -xvzf myapp-0.0.0.tgz
+          tar -xvzf myapp-0.0.0.tgz -C /tmp
           ls -la
           #cat ./file-repository/myapp*.txt
   - put: cf-env
     params:
-      manifest: myapp/manifest.yml
+      manifest: uaa-build/tmp/manifest.yml
       path: myapp
     on_success:
       put: alert
