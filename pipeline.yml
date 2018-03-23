@@ -126,6 +126,7 @@ jobs:
           chmod -R 777 uaa-build
           #chmod -R 777 ./myapp-0.0.0.tgz
           ls -la
+          cd uaa-build
           tar -xvzf myapp-0.0.0.tgz -C /tmp
           ls -la
           #cat ./file-repository/myapp*.txt
