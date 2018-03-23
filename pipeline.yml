@@ -123,6 +123,7 @@ jobs:
           export TERM=dumb
           ls -la
           ls -la uaa-build
+          chmod +x myapp-0.0.0.tgz
           tar -xvzf myapp-0.0.0.tgz -C /tmp
           ls -la
           #cat ./file-repository/myapp*.txt
