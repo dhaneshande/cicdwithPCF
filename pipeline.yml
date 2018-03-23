@@ -134,10 +134,12 @@ jobs:
           ls -la
           cp -r manifest.yml uaaa
           ls -la uaaa
+          cd uaaa
+          ls -la
   - put: cf-env
     params:
-      manifest: myapp/manifest.yml
-      path: myapp
+      manifest: uaaa/manifest.yml
+      path: uaa-build
     on_success:
       put: alert
       params:
