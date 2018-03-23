@@ -134,14 +134,12 @@ jobs:
           cd package
           ls -la
           mv ./manifest.yml ../uaaa
-          cd ..
-          cd ..
           chmod -R 777 uaaa
           cd uaaa
           ls -la
   - put: cf-env
     params:
-      manifest: uaa-build/package/manifest.yml
+      manifest: uaaa/manifest.yml
       path: uaa-build
     on_success:
       put: alert
