@@ -95,9 +95,6 @@ jobs:
         text:  Building of Node.js app unit tests Failed and storing of the build artifacts to Artifactory Failed!
 
 - name: deploy to pws
-  serial: true
-  public: true
-  trigger: true
   plan:
   - get: uaa-build
     trigger: true
