@@ -101,10 +101,10 @@ jobs:
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory 
     trigger: true
-  #- get: myapp
-    #passed:
-    #  - Build Unit Tests And Upload to JFrog Artifactory
-    #trigger: true
+  - get: myapp
+    passed:
+      - Build Unit Tests And Upload to JFrog Artifactory
+    trigger: true
   - task: retrieve
     config:
       platform: linux
@@ -132,11 +132,11 @@ jobs:
           ls -la
           cd package
           ls -la
-          cp -r manifest.yml uaaa/
+          cp -r manifest.yml uaaa
           cat uaaa
   - put: cf-env
     params:
-      manifest: uaaa/package/manifest.yml
+      manifest: uaaa/manifest.yml
       path: myapp
     on_success:
       put: alert
