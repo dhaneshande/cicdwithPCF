@@ -124,7 +124,6 @@ jobs:
           ls -la
           ls -la uaa-build
           chmod -R 777 uaa-build
-          #chmod -R 777 ./myapp-0.0.0.tgz
           ls -la
           cd uaa-build
           tar -xvzf myapp-0.0.0.tgz -C /tmp
@@ -132,7 +131,7 @@ jobs:
           #cat ./file-repository/myapp*.txt
   - put: cf-env
     params:
-      manifest: uaa-build/tmp/manifest.yml
+      manifest: uaa-build/tmp/package/manifest.yml
       path: myapp
     on_success:
       put: alert
