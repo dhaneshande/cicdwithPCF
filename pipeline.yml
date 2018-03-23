@@ -95,11 +95,12 @@ jobs:
         text:  Building of Node.js app unit tests Failed and storing of the build artifacts to Artifactory Failed!
 
 - name: deploy to pws
+  serial: true
   plan:
   - get: uaa-build
-    trigger: true
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory 
+    trigger: true
   - task: retrieve
     config:
       platform: linux
