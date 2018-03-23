@@ -115,6 +115,8 @@ jobs:
           tag: "latest"
       inputs:
       - name: uaa-build
+      outputs:
+      - name: uaaa
       run:
         path: sh
         args:
@@ -130,10 +132,11 @@ jobs:
           ls -la
           cd package
           ls -la
-          #cat ./file-repository/myapp*.txt
+          cp -r manifest.yml uaaa/
+          cat uaaa
   - put: cf-env
     params:
-      manifest: uaa-build/package/manifest.yml
+      manifest: uaaa/package/manifest.yml
       path: myapp
     on_success:
       put: alert
