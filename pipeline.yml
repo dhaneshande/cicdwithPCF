@@ -136,7 +136,7 @@ jobs:
           cat uaaa
   - put: cf-env
     params:
-      manifest: uaaa/manifest.yml
+      manifest: uaa-build/uaaa/manifest.yml
       path: myapp
     on_success:
       put: alert
