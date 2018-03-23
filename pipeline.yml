@@ -119,7 +119,7 @@ jobs:
           export TERM=dumb
           ls -la
           ls -la uaa-build
-          tar -xvzf myapp-(?<version>.*).tgz
+          tar -xvzf myapp-0.0.0.tgz
           #cat ./file-repository/myapp*.txt
   - put: cf-env
     params:
