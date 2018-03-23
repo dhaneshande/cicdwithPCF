@@ -38,7 +38,7 @@ resources:
     password: {{artifactory-password}}
     skip_ssl_verification: true
 
-- name: alert
+- name: slack
   type: slack-notification
   source:
     url: https://hooks.slack.com/services/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
@@ -80,14 +80,14 @@ jobs:
     params:
       file: uaa_war/myapp-*.tgz
     on_success:
-      put: alert
+      put: slack
       params:
         channel: "#general"
         username: dhanesh
         icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
         text:  Building of Node.js app unit tests is successfull and storing of the build artifacts to Artifactory is successfull!
     on_failure:
-      put: alert
+      put: slack
       params:
         channel: "#general"
         username: dhanesh
@@ -136,17 +136,17 @@ jobs:
     
   - put: cf-env
     params:
-      manifest: uaaa/package/manifest.yml
+      manifest: uaaa/uaa-build/package/manifest.yml
       path: uaa-build
     on_success:
-      put: alert
+      put: slack
       params:
         channel: "#general"
         username: dhanesh
         icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
         text:  PWS Deployment Success!
     on_failure:
-      put: alert
+      put: slack
       params:
         channel: "#general"
         username: dhanesh
