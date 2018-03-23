@@ -98,7 +98,7 @@ jobs:
   serial: true
   public: true
   plan:
-  - get: myapp
+  - get: uaa-build
     trigger: true
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory 
@@ -111,13 +111,14 @@ jobs:
           repository: ubuntu
           tag: "latest"
       inputs:
-      - name: myapp
+      - name: uaa-build
       run:
         path: sh
         args:
         - -exc
         - |
-          export DATESTRING=$(date +"%Y%m%d")
+          export TERM=dumb
+          ls -la
           ls -la myapp
           #cat ./file-repository/myapp*.txt
   - put: cf-env
