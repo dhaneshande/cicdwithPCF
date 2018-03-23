@@ -134,8 +134,12 @@ jobs:
           cd package
           ls -la
           mv ./manifest.yml ../uaaa
+          cd ..
+          cd ..
           #chmod -R 777 uaaa
           #cd uaaa
+          ls -la
+          cd uaaa
           ls -la
   - put: cf-env
     params:
