@@ -97,6 +97,7 @@ jobs:
 - name: deploy to pws
   serial: true
   public: true
+  trigger: true
   plan:
   - get: uaa-build
     trigger: true
@@ -119,7 +120,7 @@ jobs:
         - |
           export TERM=dumb
           ls -la
-          ls -la myapp
+          ls -la uaa-build
           #cat ./file-repository/myapp*.txt
   - put: cf-env
     params:
