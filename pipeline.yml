@@ -130,10 +130,14 @@ jobs:
           cd uaa-build
           tar -xvzf myapp-0.0.0.tgz
           ls -la
+          chmod -R 777 package
           cd package
           ls -la
           cp -r manifest.yml uaaa
           ls -la uaaa
+          cd ..
+          cd ..
+          chmod -R 777 uaaa
           cd uaaa
           ls -la
   - put: cf-env
