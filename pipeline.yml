@@ -133,7 +133,7 @@ jobs:
           cd package
           ls -la
           cp -r manifest.yml uaaa
-          cat uaaa
+          ls -la uaaa
   - put: cf-env
     params:
       manifest: myapp/manifest.yml
