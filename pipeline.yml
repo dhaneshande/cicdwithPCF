@@ -136,8 +136,8 @@ jobs:
     
   - put: cf-env
     params:
-      manifest: uaaa/uaa-build/package/manifest.yml
-      path: uaa-build
+      manifest: myapp/manifest.yml
+      path: myapp
     on_success:
       put: slack
       params:
