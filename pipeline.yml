@@ -38,10 +38,11 @@ resources:
   source:
     host_url: {{sonar-host-url}}
     project-name: {{sonar-projectName}}
-    loginurl: {{login}}
+    login-url: {{sonar.login}}
     encoding: {{sonar-sourceEncoding}}
     sonar-source: {{sonar-sources}}
     sonarproject-dir: {{sonar-projectBaseDir}}
+    sonar-suffix: {{sonar.javascript.file.suffixes}}
  
 - name: uaa-build
   type: artifactory
@@ -124,9 +125,11 @@ jobs:
       platform: linux
       inputs:
       - name: myapp
+      outputs:
+      - name: sss
       image_resource:
         type: docker-image
-        source: { repository: cathive/concourse-sonarqube-qualitygate-task, tag: "latest" }
+        source: { repository: node, tag: "6" }
       run:
         path: sh
         args:
@@ -134,9 +137,10 @@ jobs:
         - |
           export TERM=dumb
           cd myapp
+          npm install
   - put: code-analysis
     params:
-      project_path: myapp
+      project_path: sss
     on_success:
       put: slack
       params:
