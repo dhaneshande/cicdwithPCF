@@ -38,7 +38,7 @@ resources:
   source:
     host_url: {{sonar-host-url}}
     login: {{sonar-login}}
-    project_key:{{sonar-projectKey}}
+    project_key: {{sonar-projectKey}}
     project-name: {{sonar-projectName}}
     encoding: {{sonar-sourceEncoding}}
     sonar-source: {{sonar-sources}}
@@ -138,7 +138,7 @@ jobs:
         - |
           export TERM=dumb
           cd myapp
-          npm install
+          ls -la
   - put: code-analysis
     params:
       project_path: sss
