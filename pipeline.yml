@@ -140,23 +140,22 @@ jobs:
           cd myapp
           ls -la
   - put: code-analysis
-    params:
-      project_path: myapp
-      additional_properties: -Dsonar.projectKey=myproject 
+    #params:
+      #project_path: myapp
     on_success:
       put: slack
       params:
         channel: "#general"
         username: dhanesh
         icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-        text:  Building of Node.js app unit tests is successfull and storing of the build artifacts to Artifactory is successfull!
+        text:  Posting results in sonar scan is successfully Done
     on_failure:
       put: slack
       params:
         channel: "#general"
         username: dhanesh
         icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-        text:  Building of Node.js app unit tests Failed and storing of the build artifacts to Artifactory Failed!		
+        text:  Posting results in sonar scan got Failed		
 - name: deploy to pws
   serial: true
   plan:
