@@ -38,6 +38,7 @@ resources:
   source:
     host_url: {{sonar-host-url}}
     project-name: {{sonar-projectName}}
+    loginurl: {{login}}
     encoding: {{sonar-sourceEncoding}}
     sonar-source: {{sonar-sources}}
     sonarproject-dir: {{sonar-projectBaseDir}}
