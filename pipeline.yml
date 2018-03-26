@@ -141,8 +141,8 @@ jobs:
           ls -la
   - put: code-analysis
     params:
-      project_path: myapp
-      additional_properties: -Dsonar.projectKey=myproject -Dsonar.sources=.
+      project_path: myapp/sonar-project.properties
+      #additional_properties: -Dsonar.projectKey=myproject -Dsonar.sources=.
     on_success:
       put: slack
       params:
