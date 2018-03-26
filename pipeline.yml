@@ -126,7 +126,7 @@ jobs:
       - name: myapp
       image_resource:
         type: docker-image
-        source: { repository: debian, tag: "jessie" }
+        source: { repository: cathive/concourse-sonarqube-qualitygate-task, tag: "latest" }
       run:
         path: sh
         args:
