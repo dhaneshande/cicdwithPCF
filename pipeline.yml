@@ -42,7 +42,7 @@ resources:
     encoding: {{sonar-sourceEncoding}}
     sonar-source: {{sonar-sources}}
     sonarproject-dir: {{sonar-projectBaseDir}}
-    sonar-suffix: {{sonar.javascript.file.suffixes}}
+    sonar-suffix: {{sonar-javascript-file-suffixes}}
  
 - name: uaa-build
   type: artifactory
