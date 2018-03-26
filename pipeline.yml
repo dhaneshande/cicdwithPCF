@@ -37,8 +37,9 @@ resources:
   type: sonar-runner
   source:
     host_url: {{sonar-host-url}}
+    login: {{sonar-login}}
+    project_key:{{sonar-projectKey}}
     project-name: {{sonar-projectName}}
-    login-url: {{sonar-login}}
     encoding: {{sonar-sourceEncoding}}
     sonar-source: {{sonar-sources}}
     sonarproject-dir: {{sonar-projectBaseDir}}
