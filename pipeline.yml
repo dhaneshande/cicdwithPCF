@@ -161,9 +161,9 @@ jobs:
   serial: true
   plan:
   - get: uaa-build
-    passed:
-      - SonarScan 
-    trigger: true
+   # passed:
+      #- SonarScan 
+    #trigger: true
   - get: myapp
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory
