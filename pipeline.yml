@@ -141,7 +141,7 @@ jobs:
           ls -la
   - put: code-analysis
     params:
-     project_path: myapp
+     project_path: sss
     on_success:
       put: slack
       params:
