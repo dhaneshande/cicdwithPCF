@@ -141,8 +141,8 @@ jobs:
           ls -la
   - put: code-analysis
     params:
-      project_path: myapp
-      additional_properties: sonar.sources=.
+      project_path: sss
+      #additional_properties: sonar.sources=.
     on_success:
       put: slack
       params:
