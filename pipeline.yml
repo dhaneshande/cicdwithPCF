@@ -142,7 +142,7 @@ jobs:
   - put: code-analysis
     params:
      project_path: myapp
-     additional_properties: sonar-scanner -Dsonar.projectKey=myproject -Dsonar.sources=.
+     additional_properties: Dsonar.projectKey=myproject Dsonar.sources=.
     on_success:
       put: slack
       params:
