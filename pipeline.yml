@@ -139,9 +139,9 @@ jobs:
           export TERM=dumb
           cd myapp
           ls -la
-  - put: code-analysis
-    params:
-      project_path: myapp
+  #- put: code-analysis
+    #params:
+     # project_path: myapp
       #additional_properties: sonar.projectKey=dhannodeapp2 sonar.sources=.
     on_success:
       put: slack
