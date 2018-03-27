@@ -36,14 +36,15 @@ resources:
 - name: code-analysis
   type: sonar-runner
   source:
-    host_url: {{sonar-host-url}}
-    login: {{sonar-login}}
-    project_key: {{sonar-projectKey}}
-    project-name: {{sonar-projectName}}
-    encoding: {{sonar-sourceEncoding}}
-    sonar-source: {{sonar-sources}}
-    sonarproject-dir: {{sonar-projectBaseDir}}
-    sonar-suffix: {{sonar-javascript-file-suffixes}}
+    host_url: http://172.17.13.135:9000
+    sonar.login: 2cb07761280bf70b25dc4ad8f0032befaecb8821
+    sonar.projectKey: dhannodeapp2
+    sonar.projectName: myapp
+    sonar.sourceEncoding: UTF-8
+    sonar.sources: .
+    sonar.projectBaseDir: .
+    sonar.javascript.file.suffixes: .js,.jsx
+
  
 - name: uaa-build
   type: artifactory
