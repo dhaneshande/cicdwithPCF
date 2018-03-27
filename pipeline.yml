@@ -117,10 +117,10 @@ jobs:
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory
     trigger: true
-  #- get: uaa-build
-    #passed:
-      #- Build Unit Tests And Upload to JFrog Artifactory
-    #trigger: true
+  - get: uaa-build
+    passed:
+      - Build Unit Tests And Upload to JFrog Artifactory
+    trigger: true
   - task: build
     config:
       platform: linux
@@ -142,8 +142,8 @@ jobs:
   - put: code-analysis
     params:
       project_path: myapp
-      #dir: myapp
-      #additional_properties: sonar.projectKey=dhannodeapp2 sonar.sources=.
+      dir: myapp
+      additional_properties: sonar.projectKey=dhannodeapp2 sonar.sources=.
     on_success:
       put: slack
       params:
