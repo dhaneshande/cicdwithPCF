@@ -37,13 +37,13 @@ resources:
   type: sonar-runner
   source:
     host_url: {{sonar-host-url}}
-    login: {{sonar.login}}
-    project_key: {{sonar.projectKey}}
+    login: {{sonar-login}}
+    project_key: {{sonar-projectKey}}
     project-name: {{sonar-projectName}}
     encoding: {{sonar-sourceEncoding}}
-    sonar-source: {{sonar.sources}}
-    sonarproject-dir: {{sonar.projectBaseDir}}
-    sonar-suffix: {{sonar.javascript.file.suffixes}}
+    sonar-source: {{sonar-sources}}
+    sonarproject-dir: {{sonar-projectBaseDir}}
+    sonar-suffix: {{sonar-javascript-file-suffixes}}
  
 - name: uaa-build
   type: artifactory
