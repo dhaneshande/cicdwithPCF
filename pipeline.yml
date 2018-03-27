@@ -119,9 +119,9 @@ jobs:
       - Build Unit Tests And Upload to JFrog Artifactory
     trigger: true
   - get: uaa-build
-    passed:
-      - Build Unit Tests And Upload to JFrog Artifactory
-    trigger: true
+    #passed:
+      #- Build Unit Tests And Upload to JFrog Artifactory
+    #trigger: true
   - task: build
     config:
       platform: linux
