@@ -36,9 +36,14 @@ resources:
 - name: code-analysis
   type: sonar-runner
   source:
-    host_url: http://172.17.13.135:9000
-    login: 2cb07761280bf70b25dc4ad8f0032befaecb8821
-    project_key: dhannodeapp2
+    host_url: {{sonar.host.url}}
+    login: {{sonar.login}}
+    project_key: {{sonar.projectKey}}
+    project-name: {{sonar.projectName}}
+    encoding: {{sonar.sourceEncoding}}
+    sonar-source: {{sonar.sources}}
+    sonarproject-dir: {{sonar.projectBaseDir}}
+    sonar-suffix: {{sonar.javascript.file.suffixes}}
  
 - name: uaa-build
   type: artifactory
@@ -112,10 +117,10 @@ jobs:
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory
     trigger: true
-  #- get: uaa-build
-   # passed:
-    #  - Build Unit Tests And Upload to JFrog Artifactory
-   # trigger: true
+  - get: uaa-build
+    passed:
+      - Build Unit Tests And Upload to JFrog Artifactory
+    trigger: true
   - task: build
     config:
       platform: linux
@@ -135,8 +140,8 @@ jobs:
           cd myapp
           ls -la
   - put: code-analysis
-    params:
-      project_path: myapp
+    #params:
+      #project_path: myapp
     on_success:
       put: slack
       params:
@@ -154,10 +159,10 @@ jobs:
 - name: deploy to pws
   serial: true
   plan:
-  #- get: uaa-build
-   # passed:
-     # - SonarScan 
-    #trigger: true
+  - get: uaa-build
+    passed:
+      - SonarScan 
+    trigger: true
   - get: myapp
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory
