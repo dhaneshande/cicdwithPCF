@@ -117,10 +117,10 @@ jobs:
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory
     trigger: true
-  - get: uaa-build
-    passed:
-      - Build Unit Tests And Upload to JFrog Artifactory
-    trigger: true
+  #- get: uaa-build
+    #passed:
+      #- Build Unit Tests And Upload to JFrog Artifactory
+    #trigger: true
   - task: build
     config:
       platform: linux
@@ -161,12 +161,12 @@ jobs:
   serial: true
   plan:
   - get: uaa-build
-   # passed:
-      #- SonarScan 
-    #trigger: true
+    #passed:
+      #- Build Unit Tests And Upload to JFrog Artifactory 
+    trigger: true
   - get: myapp
     passed:
-      - Build Unit Tests And Upload to JFrog Artifactory
+      - SonarScan
     trigger: true
   - task: retrieve
     config:
