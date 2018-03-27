@@ -33,17 +33,6 @@ resources:
     organization: {{pws-organization}}
     space: {{pws-space}}
     skip_cert_check: true
-- name: code-analysis
-  type: sonar-runner
-  source:
-    host_url: {{sonar-host-url}}
-    login: {{sonar-login}}
-    project_key: {{sonar-projectKey}}
-    project-name: {{sonar-projectName}}
-    encoding: {{sonar-sourceEncoding}}
-    sonar-source: {{sonar-sources}}
-    sonarproject-dir: {{sonar-projectBaseDir}}
-    sonar-suffix: {{sonar-javascript-file-suffixes}}
  
 - name: uaa-build
   type: artifactory
@@ -139,10 +128,7 @@ jobs:
           export TERM=dumb
           cd myapp
           ls -la
-  #- put: code-analysis
-    #params:
-     # project_path: myapp
-      #additional_properties: sonar.projectKey=dhannodeapp2 sonar.sources=.
+  
     on_success:
       put: slack
       params:
