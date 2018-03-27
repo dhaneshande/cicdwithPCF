@@ -135,8 +135,8 @@ jobs:
           cd myapp
           ls -la
   - put: code-analysis
-    #params:
-      #project_path: myapp
+    params:
+      project_path: myapp
     on_success:
       put: slack
       params:
