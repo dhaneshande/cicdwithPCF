@@ -119,14 +119,14 @@ jobs:
       - name: sss
       image_resource:
         type: docker-image
-        source: { repository: node, tag: "6" }
+        source: { repository: cathive/concourse-sonarqube-resource, tag: "latest" }
       run:
         path: sh
         args:
         - -exc
         - |
-          export TERM=dumb
           cd myapp
+          sonar-scanner
           ls -la
   
     on_success:
