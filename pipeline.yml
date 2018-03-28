@@ -238,7 +238,7 @@ jobs:
           ls -la
           cd myapp
           ls -la
-          #gcloud auth activate-service-account --key-file=gcp.yml
+          gcloud auth login
           #gcloud config set account ${ACCOUNT}
           #gcloud config set project ${PROJECT_ID}
           #gcloud config list
