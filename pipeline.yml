@@ -124,13 +124,15 @@ jobs:
 - name: Versioning Job
   serial: true   
   plan:
+  #- get: mypp
+    #trigger: true
   - get: myappversion
     trigger: true
   - task: build
     config:
       platform: linux
       inputs:
-      - name: myapp
+      - name: myappversion
       outputs:
       - name: some-files
       image_resource:
@@ -181,6 +183,10 @@ jobs:
   disable_manual_trigger: false    
   plan:
   - get: myapp
+    #passed:
+      #- Versioning Job
+    #trigger: true
+  - get: myappversion
     passed:
       - Versioning Job
     trigger: true
