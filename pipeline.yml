@@ -15,7 +15,6 @@ resource_types:
   type: docker-image
   source:
     repository: cathive/concourse-sonarqube-resource
-	
 - name: gcp 
   type: docker-image
   source:
@@ -48,7 +47,6 @@ resources:
     CLIENT_ID: {{client_id}}
     CLIENT_CERT_URL: {{client_cert_url}}
     skip_cert_check: true 
-	
 - name: uaa-build
   type: artifactory
   source:
