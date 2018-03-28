@@ -75,7 +75,7 @@ jobs:
       inputs:
       - name: myapp
       outputs:
-      - name: sss
+      - name: some-files
       image_resource:
         type: docker-image
         source: { repository: ubuntu, tag: "latest" }
