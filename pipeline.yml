@@ -26,10 +26,10 @@ resources:
   source:
     uri: https://github.com/dhaneshande/cicdwithPCF.git
     branch: master
-- name: SpringBootSimpleRest
+- name: myappversion
   type: git
   source:
-    uri: git@github.com:dhaneshande/SpringBootPipelineStoringJarToGit.git
+    uri: git@github.com:dhaneshande/cicdwithPCF.git
     branch: master
     private_key: |
       -----BEGIN RSA PRIVATE KEY-----
@@ -124,7 +124,7 @@ jobs:
 - name: Versioning Job
   serial: true   
   plan:
-  - get: myapp
+  - get: myappversion
     trigger: true
   - task: build
     config:
@@ -141,7 +141,7 @@ jobs:
         args:
         - -exc
         - |
-          cd myapp
+          cd myappversion
           PACKAGE_VERSION=$(cat package.json \
           | grep version \
           | head -1 \
@@ -156,6 +156,12 @@ jobs:
           echo "$PACKAGE_VERSION" > "$test.txt" 		  
           cp -r .txt some-files/
           cat some-files/.txt
+          git config --global user.email "dande@miraclesoft.com"
+          git config --global user.name "dhaneshande"
+          #git init
+          git add .
+          git commit -m "Bumped date"
+          git push origin master
     on_success:
       put: slack
       params:
