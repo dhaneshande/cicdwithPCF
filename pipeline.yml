@@ -239,8 +239,8 @@ jobs:
           cd myapp
           ls -la
           gcloud auth activate-service-account --key-file=gcp.yml
-          gcloud config set account ${ACCOUNT}
-          gcloud config set project ${PROJECT_ID}
+          gcloud config set account service_account
+          gcloud config set project miracledemo-198203
           gcloud config list
           gcloud app deploy
     
