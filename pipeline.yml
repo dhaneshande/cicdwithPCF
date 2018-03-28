@@ -64,11 +64,49 @@ resources:
 
 jobs:
  
+- name: Versioning Job
+  serial: true   
+  plan:
+  - get: myapp
+    trigger: true
+  - task: build
+    config:
+      platform: linux
+      inputs:
+      - name: myapp
+      outputs:
+      - name: sss
+      image_resource:
+        type: docker-image
+        source: { repository: ubuntu, tag: "latest" }
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          cd myapp
+  
+    on_success:
+      put: slack
+      params:
+        channel: "#general"
+        username: dhanesh
+        icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
+        text:  Posting results in sonar scan is successfully Done
+    on_failure:
+      put: slack
+      params:
+        channel: "#general"
+        username: dhanesh
+        icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
+        text:  Posting results in sonar scan got Failed			
 - name: Build Unit Tests And Upload to JFrog Artifactory 
   serial: true
   disable_manual_trigger: false    
   plan:
   - get: myapp
+    passed:
+      - Build Unit Tests And Upload to JFrog Artifactory
     trigger: true
   - task: build
     config:
@@ -239,8 +277,8 @@ jobs:
           cd myapp
           ls -la
           gcloud auth activate-service-account --key-file=gcp.yml
-          gcloud config set account service_account
-          gcloud config set project miracledemo-198203
+          gcloud config set account ${ACCOUNT}
+          gcloud config set project ${PROJECT_ID}
           gcloud config list
           gcloud app deploy
     
