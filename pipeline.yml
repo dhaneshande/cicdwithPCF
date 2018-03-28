@@ -223,7 +223,7 @@ jobs:
       image_resource:
         type: docker-image
         source:
-          repository: ubuntu
+          repository: google/cloud-sdk
           tag: "latest"
       inputs:
       - name: myapp
@@ -238,6 +238,7 @@ jobs:
           ls -la
           cd myapp
           ls -la
+          gcloud app deploy
     
   - put: gcp-env
     params:
