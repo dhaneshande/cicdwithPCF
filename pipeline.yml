@@ -91,7 +91,7 @@ jobs:
         channel: "#general"
         username: dhanesh
         icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-        text:  Building of Node.js app unit tests is successfull and storing of the build artifacts to Artifactory is successfull!
+        text:  Building of Node.js app and unit tests is successfull and storing of the build artifacts to Artifactory is successfull!
     on_failure:
       put: slack
       params:
@@ -106,10 +106,6 @@ jobs:
     passed:
       - Build Unit Tests And Upload to JFrog Artifactory
     trigger: true
-  #- get: uaa-build
-    #passed:
-      #- Build Unit Tests And Upload to JFrog Artifactory
-    #trigger: true
   - task: build
     config:
       platform: linux
@@ -146,9 +142,7 @@ jobs:
 - name: deploy to pws
   serial: true
   plan:
-  - get: uaa-build
-    #passed:
-      #- Build Unit Tests And Upload to JFrog Artifactory 
+  - get: uaa-build 
     trigger: true
   - get: myapp
     passed:
