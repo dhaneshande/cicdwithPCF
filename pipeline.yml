@@ -143,7 +143,9 @@ jobs:
         args:
         - -exc
         - |
-          cd myappversion
+          git clone myappversion built-project
+          cd built-project
+          ls -la
           PACKAGE_VERSION=$(cat package.json \
           | grep version \
           | head -1 \
@@ -162,7 +164,7 @@ jobs:
           git config --global user.name "dhaneshande"
           #git init
           git add .
-          git commit -m "Bumped date"
+          git commit -m "Bumped release"
           git push origin master
     on_success:
       put: slack
