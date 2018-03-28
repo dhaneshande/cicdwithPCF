@@ -15,7 +15,11 @@ resource_types:
   type: docker-image
   source:
     repository: cathive/concourse-sonarqube-resource
-   
+	
+- name: gcp 
+  type: docker-image
+  source:
+    repository: google/cloud-sdk   
  
 resources:
 - name: myapp
@@ -34,6 +38,17 @@ resources:
     space: {{pws-space}}
     skip_cert_check: true
  
+- name: gcp-env
+  type: gcp
+  source:
+    ACCOUNT: {{gcp-account}}
+    PROJECT_ID: {{gcp-project-id}}
+    KEY_ID_GCP: {{key_id_gcp}}
+    KEY_GCP: {{key_gcp}}
+    CLIENT_ID: {{client_id}}
+    CLIENT_CERT_URL: {{client_cert_url}}
+    skip_cert_check: true 
+	
 - name: uaa-build
   type: artifactory
   source:
@@ -180,6 +195,55 @@ jobs:
   - put: cf-env
     params:
       manifest: myapp/manifest.yml
+      path: myapp
+    on_success:
+      put: slack
+      params:
+        channel: "#general"
+        username: dhanesh
+        icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
+        text:  PWS Deployment Success!
+    on_failure:
+      put: slack
+      params:
+        channel: "#general"
+        username: dhanesh
+        icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
+        text:  PWS Deployment Failed!
+- name: deploy to GCP
+  serial: true
+  plan:
+  - get: uaa-build 
+    trigger: true
+  - get: myapp
+    passed:
+      - SonarScan
+    trigger: true
+  - task: retrieve
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: ubuntu
+          tag: "latest"
+      inputs:
+      - name: myapp
+      outputs:
+      - name: uaaag
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          export TERM=dumb
+          ls -la
+          cd myapp
+          ls -la
+    
+  - put: gcp-env
+    params:
+      manifest: myapp/app.yaml
       path: myapp
     on_success:
       put: slack
