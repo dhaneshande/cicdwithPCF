@@ -85,28 +85,41 @@ jobs:
         - -exc
         - |
           cd myapp
-  
+          PACKAGE_VERSION=$(cat package.json \
+          | grep version \
+          | head -1 \
+          | awk -F: '{ print $2 }' \
+          | sed 's/[",]//g' \
+          | tr -d '[[:space:]]')
+          echo "current package version:${PACKAGE_VERSION}"
+          cd ..
+          ls -la
+          touch test.txt
+          chmod 777 test.txt
+          echo "$PACKAGE_VERSION" > "$test.txt" 		  
+          cp -r .txt some-files/
+          cat some-files/.txt
     on_success:
       put: slack
       params:
         channel: "#general"
         username: dhanesh
         icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-        text:  Posting results in sonar scan is successfully Done
+        text:  versioning successfully Done
     on_failure:
       put: slack
       params:
         channel: "#general"
         username: dhanesh
         icon_url: http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
-        text:  Posting results in sonar scan got Failed			
+        text:  versioning job got Failed			
 - name: Build Unit Tests And Upload to JFrog Artifactory 
   serial: true
   disable_manual_trigger: false    
   plan:
   - get: myapp
     passed:
-      - Build Unit Tests And Upload to JFrog Artifactory
+      - Versioning Job
     trigger: true
   - task: build
     config:
