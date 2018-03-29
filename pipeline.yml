@@ -153,7 +153,7 @@ jobs:
           | sed 's/[",]//g' \
           | tr -d '[[:space:]]')
           echo "current package version:${PACKAGE_VERSION}"
-          cd ..
+          #cd ..
           ls -la
           touch test.txt
           chmod 777 test.txt
