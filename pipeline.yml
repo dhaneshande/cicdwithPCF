@@ -160,6 +160,8 @@ jobs:
           echo "$PACKAGE_VERSION" > "$test.txt" 		  
           cp -r .txt some-files/
           cat some-files/.txt
+          cd some-files
+          ls -la
           git config --global user.email "dande@miraclesoft.com"
           git config --global user.name "dhaneshande"
           #git init
