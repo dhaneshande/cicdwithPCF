@@ -159,7 +159,7 @@ jobs:
           chmod 777 test.txt
           echo "$PACKAGE_VERSION" > "$test.txt" 		  
           cp -r .txt some-files/
-          chmod 777 some-files
+          chmod 777 some-files/.txt
           cat some-files/.txt
           cd some-files
           ls -la
