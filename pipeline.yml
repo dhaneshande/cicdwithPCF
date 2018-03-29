@@ -167,7 +167,7 @@ jobs:
           git commit -m "Bumped release"
           git push origin master
   - put: myappversion
-    params: {file: myappversion/number}
+    params: {file: built-project/.txt}
     on_success:
       put: slack
       params:
