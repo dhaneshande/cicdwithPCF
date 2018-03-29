@@ -134,7 +134,7 @@ jobs:
       inputs:
       - name: myappversion
       outputs:
-      - name: some-files
+      - name: built-project
       image_resource:
         type: docker-image
         source: { repository: ceregousa/ubuntu-git, tag: "latest" }
