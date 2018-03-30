@@ -101,6 +101,7 @@ resources:
     PROJECT_ID: {{gcp-project-id}}
     KEY_ID_GCP: {{key_id_gcp}}
     KEY_GCP: {{key_gcp}}
+    CLIENT_EMAIL: {{client_email}}
     CLIENT_ID: {{client_id}}
     CLIENT_CERT_URL: {{client_cert_url}}
     skip_cert_check: true 
@@ -369,11 +370,11 @@ jobs:
           #./keyfile-create.sh
           #echo "******************************Service Account File Generated with name keyfile.json***********************************"
           #cat keyfile.json
-          gcloud auth activate-service-account --key-file=keyfile.json
-          gcloud config set account dhanesh.ande1@gmail.com
-          gcloud config set project miracledemo-198203
-          gcloud config list
-          gcloud app deploy app.yaml
+          #gcloud auth activate-service-account --key-file=keyfile.json
+          #gcloud config set account dhanesh.ande1@gmail.com
+          #gcloud config set project miracledemo-198203
+          #gcloud config list
+          #gcloud app deploy app.yaml
     
   - put: gcp-env
     params:
