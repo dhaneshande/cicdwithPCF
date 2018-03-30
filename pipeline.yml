@@ -155,6 +155,8 @@ jobs:
           echo "current package version:${PACKAGE_VERSION}"
           cd ..
           ls -la
+          mkdir target
+          cd target
           touch test.txt
           chmod 777 test.txt
           echo "$PACKAGE_VERSION" > "$test.txt" 		  
@@ -169,8 +171,8 @@ jobs:
           git add .
           git commit -m "Bumped release"
           git push origin master
-  - put: myappversion
-    params: {file: some-files}
+  #- put: myappversion
+    #params: {file: some-files}
     on_success:
       put: slack
       params:
@@ -365,7 +367,12 @@ jobs:
           ls -la
           cd myapp
           ls -la
-          gcloud auth activate-service-account --key-file=gcp.yml
+          chmod 744 keyfile-create.sh
+          echo "******************************Building Google Cloud Service Account file*****************************************"
+          ./keyfile-create.sh
+          echo "******************************Service Account File Generated with name keyfile.json***********************************"
+          cat keyfile.json
+          gcloud auth activate-service-account --key-file=keyfile.json
           gcloud config set account ${ACCOUNT}
           gcloud config set project ${PROJECT_ID}
           gcloud config list
