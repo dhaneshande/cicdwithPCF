@@ -155,8 +155,6 @@ jobs:
           echo "current package version:${PACKAGE_VERSION}"
           cd ..
           ls -la
-          mkdir target
-          cd target
           touch test.txt
           chmod 777 test.txt
           echo "$PACKAGE_VERSION" > "$test.txt" 		  
