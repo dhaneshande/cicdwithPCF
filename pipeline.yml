@@ -370,10 +370,10 @@ jobs:
           #echo "******************************Service Account File Generated with name keyfile.json***********************************"
           #cat keyfile.json
           gcloud auth activate-service-account --key-file=keyfile.json
-          gcloud config set account dhanesh
+          gcloud config set account dhanesh.ande1@gmail.com
           gcloud config set project miracledemo-198203
           gcloud config list
-          gcloud app deploy
+          gcloud app deploy app.yaml
     
   - put: gcp-env
     params:
