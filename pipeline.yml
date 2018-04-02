@@ -98,12 +98,12 @@ resources:
   type: gcp
   source:
     ACCOUNT: {{ACCOUNT}}
-    PROJECT_ID: {{gcp-project-id}}
-    KEY_ID_GCP: {{key_id_gcp}}
-    KEY_GCP: {{key_gcp}}
-    CLIENT_EMAIL: {{client_email}}
-    CLIENT_ID: {{client_id}}
-    CLIENT_CERT_URL: {{client_cert_url}}
+    PROJECT_ID: {{PROJECT_ID}}
+    KEY_ID_GCP: {{KEY_ID_GCP}}
+    KEY_GCP: {{KEY_GCP}}
+    CLIENT_EMAIL: {{CLIENT_EMAIL}}
+    CLIENT_ID: {{CLIENT_ID}}
+    CLIENT_CERT_URL: {{CLIENT_CERT_URL}}
     skip_cert_check: true 
 - name: uaa-build
   type: artifactory
