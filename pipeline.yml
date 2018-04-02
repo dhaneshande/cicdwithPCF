@@ -98,7 +98,7 @@ resources:
   type: gcp
   source:
     ACCOUNT: {{ACCOUNT}}
-    project_id: {{project_id}}
+    PROJECT_ID: {{PROJECT_ID}}
     KEY_ID_GCP: {{KEY_ID_GCP}}
     KEY_GCP: {{KEY_GCP}}
     CLIENT_EMAIL: {{CLIENT_EMAIL}}
