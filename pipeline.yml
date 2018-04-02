@@ -27,10 +27,12 @@ resources:
     uri: https://github.com/dhaneshande/cicdwithPCF.git
     branch: master
 - name: myappversion
-  type: git
+  type: semver
   source:
+    driver: git
     uri: git@github.com:dhaneshande/cicdwithPCF.git
     branch: master
+    file: master
     private_key: |
       -----BEGIN RSA PRIVATE KEY-----
       MIIJKAIBAAKCAgEA0R5GXiVKGZLMm5zFFNEUyS03wfTPoD69I1AD8Dg+CM1Pj/ir
@@ -123,6 +125,7 @@ resources:
 jobs:
  
 - name: Versioning Job
+  public: true
   serial: true
   disable_manual_trigger: false   
   plan:
@@ -165,13 +168,13 @@ jobs:
           cat some-files/.txt
           cd some-files
           ls -la
-          git config --global user.email "dande@miraclesoft.com"
-          git config --global user.name "dhaneshande"
-          git add .
-          git commit -m "Bumped release"
-          git push origin master
+          #git config --global user.email "dande@miraclesoft.com"
+          #git config --global user.name "dhaneshande"
+          #git add .
+          #git commit -m "Bumped release"
+          #git push origin master
   - put: myappversion
-    params: {repository: some-files}
+    params: {file: myappversion/number}
     on_success:
       put: slack
       params:
