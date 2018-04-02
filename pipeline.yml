@@ -94,16 +94,16 @@ resources:
     space: {{pws-space}}
     skip_cert_check: true
  
-#- name: gcp-env
-  #type: gcp
-  #source:
-    #ACCOUNT: {{gcp-account}}
-    #PROJECT_ID: {{gcp-project-id}}
-    #KEY_ID_GCP: {{key_id_gcp}}
-    #KEY_GCP: {{key_gcp}}
-    #CLIENT_EMAIL: {{client_email}}
-    #CLIENT_ID: {{client_id}}
-    #CLIENT_CERT_URL: {{client_cert_url}}
+- name: gcp-env
+  type: gcp
+  source:
+    ACCOUNT: {{gcp-account}}
+    PROJECT_ID: {{gcp-project-id}}
+    KEY_ID_GCP: {{key_id_gcp}}
+    KEY_GCP: {{key_gcp}}
+    CLIENT_EMAIL: {{client_email}}
+    CLIENT_ID: {{client_id}}
+    CLIENT_CERT_URL: {{client_cert_url}}
     skip_cert_check: true 
 - name: uaa-build
   type: artifactory
@@ -373,10 +373,10 @@ jobs:
           gcloud config set project ${PROJECT_ID}
           gcloud config list
           gcloud app deploy app.yaml
-  #- put: gcp-env
-    #params:
-      #manifest: myapp/app.yaml
-      #path: myapp
+  - put: gcp-env
+    params:
+      manifest: myapp/app.yaml
+      path: myapp
     on_success:
       put: slack
       params:
