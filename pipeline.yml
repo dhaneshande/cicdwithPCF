@@ -30,7 +30,6 @@ resources:
   type: semver
   source:
     driver: git
-    initial_version: 0.0.1
     uri: git@github.com:dhaneshande/cicdwithPCF.git
     branch: master
     file: master
@@ -168,7 +167,12 @@ jobs:
           chmod 777 some-files/.txt
           cat some-files/.txt
           cd some-files
-          ls -la        
+          ls -la
+          git config --global user.email "dande@miraclesoft.com"
+          git config --global user.name "dhaneshande"
+          git add .
+          git commit -m "Bumped release"
+          git push origin master
   - put: myappversion
     params: {file: myappversion/number}
     on_success:
