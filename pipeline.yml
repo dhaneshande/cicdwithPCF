@@ -126,8 +126,7 @@ jobs:
  
 - name: Versioning Job
   public: true
-  serial: true
-  disable_manual_trigger: false   
+  serial: true   
   plan:
   #- get: mypp
     #trigger: true
