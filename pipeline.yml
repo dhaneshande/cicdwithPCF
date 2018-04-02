@@ -170,8 +170,8 @@ jobs:
           git add .
           git commit -m "Bumped release"
           git push origin master
-  #- put: myappversion
-    #params: {file: some-files}
+  - put: myappversion
+    params: {repository: some-files}
     on_success:
       put: slack
       params:
