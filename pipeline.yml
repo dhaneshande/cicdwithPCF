@@ -27,9 +27,8 @@ resources:
     uri: https://github.com/dhaneshande/cicdwithPCF.git
     branch: master
 - name: myappversion
-  type: semver
+  type: git
   source:
-    driver: git
     uri: git@github.com:dhaneshande/cicdwithPCF.git
     branch: master
     file: master
