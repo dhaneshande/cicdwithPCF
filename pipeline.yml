@@ -30,6 +30,7 @@ resources:
   type: semver
   source:
     driver: git
+    initial_version: 0.0.1
     uri: git@github.com:dhaneshande/cicdwithPCF.git
     branch: master
     file: master
