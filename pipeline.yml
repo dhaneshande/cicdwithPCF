@@ -366,9 +366,7 @@ jobs:
           cd myapp
           ls -la
           chmod 744 keyfile-create.sh
-          echo "******************************Building Google Cloud Service Account file*****************************************"
           ./keyfile-create.sh
-          echo "******************************Service Account File Generated with name keyfile.json***********************************"
           cat keyfile.json
           gcloud auth activate-service-account --key-file=keyfile.json
           gcloud config set account ${ACCOUNT}
