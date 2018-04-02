@@ -31,7 +31,6 @@ resources:
   source:
     uri: git@github.com:dhaneshande/cicdwithPCF.git
     branch: master
-    file: master
     private_key: |
       -----BEGIN RSA PRIVATE KEY-----
       MIIJKAIBAAKCAgEA0R5GXiVKGZLMm5zFFNEUyS03wfTPoD69I1AD8Dg+CM1Pj/ir
