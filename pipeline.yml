@@ -167,12 +167,7 @@ jobs:
           chmod 777 some-files/.txt
           cat some-files/.txt
           cd some-files
-          ls -la
-          #git config --global user.email "dande@miraclesoft.com"
-          #git config --global user.name "dhaneshande"
-          #git add .
-          #git commit -m "Bumped release"
-          #git push origin master
+          ls -la        
   - put: myappversion
     params: {file: myappversion/number}
     on_success:
