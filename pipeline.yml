@@ -97,7 +97,7 @@ resources:
 - name: gcp-env
   type: gcp
   source:
-    ACCOUNT: {{gcp-account}}
+    ACCOUNT: {{ACCOUNT}}
     PROJECT_ID: {{gcp-project-id}}
     KEY_ID_GCP: {{key_id_gcp}}
     KEY_GCP: {{key_gcp}}
