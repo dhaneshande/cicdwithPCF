@@ -123,7 +123,8 @@ resources:
 jobs:
  
 - name: Versioning Job
-  serial: true   
+  serial: true
+  disable_manual_trigger: false   
   plan:
   #- get: mypp
     #trigger: true
