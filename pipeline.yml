@@ -123,7 +123,6 @@ resources:
 jobs:
  
 - name: Versioning Job
-  public: true
   serial: true   
   plan:
   #- get: mypp
@@ -148,6 +147,7 @@ jobs:
           git clone myappversion some-files
           cd some-files
           ls -la
+          npm pack
           PACKAGE_VERSION=$(cat package.json \
           | grep version \
           | head -1 \
@@ -170,8 +170,9 @@ jobs:
           git add .
           git commit -m "Bumped release"
           git push origin master
+
   - put: myappversion
-    params: {file: myappversion/number}
+    params: {repository: built-project}
     on_success:
       put: slack
       params:
