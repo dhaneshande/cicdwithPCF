@@ -123,6 +123,7 @@ resources:
 jobs:
  
 - name: Versioning Job
+  public: true
   serial: true   
   plan:
   #- get: mypp
@@ -375,10 +376,17 @@ jobs:
           gcloud config set project ${PROJECT_ID}
           gcloud config list
           gcloud app deploy app.yaml
-  - put: gcp-env
+  #- put: gcp-env
     params:
-      manifest: myapp/app.yaml
-      path: myapp
+      #manifest: myapp/app.yaml
+      #path: myapp
+      ACCOUNT: {{gcp-account}}
+      PROJECT_ID: {{gcp-project-id}}
+      KEY_ID_GCP: {{key_id_gcp}}
+      KEY_GCP: {{key_gcp}}
+      CLIENT_ID: {{client_id}}
+      CLIENT_EMAIL: {{client_email}}
+      CLIENT_CERT_URL: {{client_cert_url}} 
     on_success:
       put: slack
       params:
