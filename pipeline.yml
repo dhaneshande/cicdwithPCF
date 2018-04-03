@@ -67,8 +67,8 @@ resources:
 jobs:
  
 - name: Versioning Job
-  public: true
-  serial: true   
+  serial: true
+  disable_manual_trigger: false   
   plan:
   - get: myapp
     trigger: true
